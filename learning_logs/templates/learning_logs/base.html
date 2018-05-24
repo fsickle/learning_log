@@ -1,0 +1,5 @@
+<p>
+  <a href="{% url 'learning_logs:index' %}">Learning Log</a>
+  <a href="{% url 'learning_logs:topics' %}">Topics</a>
+</p><!-- 模板标签,更新后自动插入修改后的 URL 名为 index 匹配 -->
+{% block content %}{% endblock content%}

@@ -1,0 +1,19 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block content %}
+  <p>Topics</p>
+  
+  <ul>
+    {% for topic in topics %}
+      <li>
+          <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+      </li> <!-- 模板中打印变量使用双花括号 -->
+    {% empty %} <!-- 告诉列表为空时该怎么办 -->
+      <li>No topics have been added yet.</li>
+    {% endfor %} <!-- 指出for循环结束位置 -->
+  </ul>
+  
+  <a href="{% url 'learning_logs:new_topic' %}">Add a new topic:</a>
+  
+{% endblock content %}
+
