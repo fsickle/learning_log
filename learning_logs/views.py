@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Topic
+from .models import Topic,Entry
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from .forms import TopicForm, EntryForm
@@ -48,12 +48,31 @@ def new_entry(request,topic_id):
     else:
         form = EntryForm(data=request.POST)
         if form.is_valid():
-            new_entry = form.save(commit=False)
-            new_entry.topic = topic
-            new_entry.save()
+            new_entry = form.save(commit=False) # 不保存在数据库
+            new_entry.topic = topic # 把 topic 赋给
+            new_entry.save() #保存数据库
             return HttpResponseRedirect(reverse('learning_logs:topic',
                     args=[topic_id]))
                     
     context = {'topic':topic,'form':form}
     return render(request,'learning_logs/new_entry.html',context)
+    
+
+def edit_entry(request,entry_id):
+    '''编辑既有条目'''
+    entry = Entry.objects.get(id=entry_id)
+    topic = entry.topic
+    
+    if request.method != 'POST':
+        form = EntryForm(instance=entry) # 使用既有条目填充
+    
+    else:
+        form = EntryForm(instance=entry,data=request.POST)
+        if form.isvalid():
+            form.save()
+            return HttpResponseRedirect(reverse('learning_logs:topic',
+                args=[topic.id]))
+    
+    context = {'entry':entry,'topic':topic,'form':form}
+    return render(request,'learning_logs/edit_entry.html',context)
 

@@ -7,7 +7,7 @@
   <p>Add a new entry:</p>
   
   <!-- 将表单 Post 到 new_entry-->
-  <form action="{% url 'learning_logs:new_entry' topic.id %}" method='post'>
+  <form action="{% url 'learning_logs:new_entry' entry.id %}" method='post'>
     {% csrf_token %} <!-- 防止跨站请求伪造 -->
     {{ form.as_p }}   <!-- 显示表单 -->
     <button name='submit'>add entry</button>
