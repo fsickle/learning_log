@@ -1,13 +1,21 @@
 {% extends 'learning_logs/base.html' %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>Add a new topic:</h2>
+{% endblock header %}
 
 {% block content %}
-  <p>Add a new topic:</p>
   
   <!-- 将表单 Post 到 new_topic,调用 new_topic 完成重定向 -->
-  <form action="{% url 'learning_logs:new_topic' %}" method='post'>
+  <form action="{% url 'learning_logs:new_topic' %}" method='post' 
+        class='form'>
     {% csrf_token %} <!-- 防止跨站请求伪造 -->
-    {{ form.as_p }}   <!-- 显示表单 -->
-    <button name='submit'>add topic</button> <!-- 提交按钮 -->
+    {% bootstrap_form form %}   <!-- 显示表单 -->
+    {% buttons %}
+    <button name='submit' class="btn btn-primary">add topic</button>
+    <!-- 提交按钮 -->
+    {% endbuttons %}
   </form>
   
 {% endblock content %}

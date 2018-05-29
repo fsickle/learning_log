@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    # 第三方
+    'bootstrap3',
     # 我的应用程序
     'learning_logs',
     'users',
@@ -124,3 +126,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # 我的设置
 LOGIN_URL = '/users/login/'
+# django-bootstrap3 的设置：包含一个 JavaScript 的库
+BOOTSTRAP3 = {
+    'include_jquery': True,
+    }
