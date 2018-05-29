@@ -1,16 +1,24 @@
 {% extends 'learning_logs/base.html' %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>Add a new entry:</h2>
+{% endblock header %} 
 
 {% block content %}
 
-  <p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
-
-  <p>Add a new entry:</p>
+  <h3><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></h3>
   
   <!-- 将表单 Post 到 new_entry-->
-  <form action="{% url 'learning_logs:new_entry' entry.id %}" method='post'>
+  <form action="{% url 'learning_logs:new_entry' topic.id %}" method='post'
+        class='form'>
+        
     {% csrf_token %} <!-- 防止跨站请求伪造 -->
-    {{ form.as_p }}   <!-- 显示表单 -->
-    <button name='submit'>add entry</button>
+    {% bootstrap_form form %}  <!-- 显示表单 -->
+    
+    {% buttons %}
+    <button name='submit' class='btn btn-primary'>add entry</button>
+    {% endbuttons %}
   </form>
   
 {% endblock content %}

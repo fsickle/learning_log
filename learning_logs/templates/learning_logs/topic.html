@@ -1,14 +1,14 @@
 {% extends 'learning_logs/base.html' %}
 {% block header %}
   <h2>{{ topic }}</h2>
+  <p>
+    <a href="{% url 'learning_logs:new_entry' topic.id %}">add new entry</a>
+  </p>
 {% endblock header %}
  
 {% block content %}
   
-  <p>
-    <a href="{% url 'learning_logs:new_entry' topic.id %}">add new entry</a>
-  </p>
-  <ul>
+  
   {% for entry in entries %}
     <div class='panel panel-default'>
       <div class="panel-heading">
@@ -27,7 +27,7 @@
   {% empty %}
       There are no entries for this topic yet.
   {% endfor %}
-  </ul>
+
 
 {% endblock content %}
     

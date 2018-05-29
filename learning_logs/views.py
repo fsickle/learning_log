@@ -62,7 +62,7 @@ def new_entry(request,topic_id):
             new_entry.topic = topic # 把 topic 赋给
             new_entry.save() #保存数据库
             return HttpResponseRedirect(reverse('learning_logs:topic',
-                    args=[topic_id]))
+                    args=[topic.id]))
                     
     context = {'topic':topic,'form':form}
     return render(request,'learning_logs/new_entry.html',context)
@@ -80,7 +80,7 @@ def edit_entry(request,entry_id):
     
     else:
         form = EntryForm(instance=entry,data=request.POST)
-        if form.isvalid():
+        if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('learning_logs:topic',
                 args=[topic.id]))
